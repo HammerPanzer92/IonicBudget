@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 2
+      Revenus
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,9 +9,32 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
+      <ion-title size="large">Revenus</ion-title>
     </ion-toolbar>
   </ion-header>
+  <ion-card *ngIf="!addRev">
+    <ion-card-header>Les revenus</ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let revenu of revenus;let indexRev=index">
+          {{revenu.nom}} : {{revenu.montant}} <ion-button (click)="supRevenu(indexRev)" color="danger"><ion-icon name="trash-outline"></ion-icon></ion-button>
+        </ion-item>
+        <ion-button (click)="modifAddRev()">Ajout revenu</ion-button>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+  <ion-card *ngIf="addRev">
+    <ion-card-header>Ajout d'un revenu</ion-card-header>
+    <ion-card-content>
+      <form #form="ngForm" (submit)="ajoutRevenu(form)">
+        <ion-label>Intitulé</ion-label>
+        <ion-input type="text" name="intitule" ngModel required></ion-input>
+        <ion-label>Montant (par mois)</ion-label>
+        <ion-input type="number" name="montant" ngModel required></ion-input>
+        <ion-button type="submit" [disabled]="!form.valid">Ajouter</ion-button>
+      </form>
+    </ion-card-content>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  </ion-card>
+
 </ion-content>

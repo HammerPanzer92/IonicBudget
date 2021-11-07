@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 1
+      Budget
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,9 +9,33 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
+      <ion-title size="large">Budget</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <ion-card>
+    <ion-card-header>Budget du mois</ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-list-header color="primary">
+          Dépense
+        </ion-list-header>
+        <ion-item *ngFor="let charge of charges">
+          {{charge.nom}} : {{charge.montant}}
+        </ion-item>
+        <ion-list-header color="primary">
+          Revenus
+        </ion-list-header>
+        <ion-item *ngFor="let revenu of revenus">
+          {{revenu.nom}} : {{revenu.montant}}
+        </ion-item>
+        <ion-list-header color="primary">
+          Reste
+        </ion-list-header>
+        <ion-item>
+          {{reste}}
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

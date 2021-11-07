@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 3
+      Charges
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,9 +9,32 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
+      <ion-title size="large">Charges</ion-title>
     </ion-toolbar>
   </ion-header>
+  <ion-card *ngIf="!addCharge">
+    <ion-card-header>Les revenus</ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let charge of charges; let indexCharge=index">
+          {{charge.nom}} : {{charge.montant}}  <ion-button (click)="supCharge(indexCharge)" color="danger"><ion-icon name="trash-outline"></ion-icon></ion-button>
+        </ion-item>
+        <ion-button (click)="modifAddCharge()">Ajout charge</ion-button>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+  <ion-card *ngIf="addCharge">
+    <ion-card-header>Ajout d'un revenu</ion-card-header>
+    <ion-card-content>
+      <form #form="ngForm" (submit)="ajoutCharge(form)">
+        <ion-label>Intitulé</ion-label>
+        <ion-input type="text" name="intitule" ngModel required></ion-input>
+        <ion-label>Montant (par mois)</ion-label>
+        <ion-input type="number" name="montant" ngModel required></ion-input>
+        <ion-button type="submit" [disabled]="!form.valid">Ajouter</ion-button>
+      </form>
+    </ion-card-content>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  </ion-card>
+
 </ion-content>
