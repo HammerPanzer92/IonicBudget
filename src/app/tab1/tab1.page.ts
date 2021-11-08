@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Subscription, observable, interval } from 'rxjs';
 import { BudgetService } from '../budget.service';
 import Chart from 'chart.js/auto'
 
@@ -17,7 +16,6 @@ export class Tab1Page {
   charges: any[];
   revenus: any[];
   total: number[];
-  sub: Subscription = new Subscription;
 
   totalCharges: number = 0;
   totalRevenus: number = 0;
