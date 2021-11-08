@@ -55,7 +55,6 @@ export class Tab1Page {
       data: {
         labels: ['Charges', 'Revenus', "Reste"],
         datasets: [{
-          label: '# of Votes',
           data: [this.total[0], this.total[1], this.total[2]],
           backgroundColor: [
             'rgba(255, 159, 64, 0.2)',
