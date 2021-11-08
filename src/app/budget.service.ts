@@ -8,7 +8,7 @@ export class BudgetService {
 
   charges: any[] = [{nom: "Cacahuétes",montant:25},{nom:"Offrande a Gaben",montant:100}];
   revenus: any[] = [{nom: "Pistache", montant:30},{nom: "Vente de Krabby Patty",montant:500}];
-  reste: number = 0;
+  total: number[] = [0,0,0];
 
   constructor() { }
 
@@ -17,11 +17,13 @@ export class BudgetService {
    */
   calculReste(){
     for(let revenu of this.revenus){
-      this.reste += revenu.montant;
+      this.total[2] += revenu.montant;
+      this.total[1] += revenu.montant;
     }
 
     for(let charge of this.charges){
-      this.reste -= charge.montant;
+      this.total[2] -= charge.montant;
+      this.total[0] += charge.montant
     }
   }
 
@@ -31,7 +33,8 @@ export class BudgetService {
    */
   addRevenu(revenu:any){
     this.revenus.push(revenu);
-    this.reste += revenu.montant;
+    this.total[2] += revenu.montant;
+    this.total[1] += revenu.montant;
   }
 
   /**
@@ -40,7 +43,8 @@ export class BudgetService {
    */
   addCharge(charge:any){
     this.charges.push(charge);
-    this.reste -= charge.montant;
+    this.total[2] -= charge.montant;    
+    this.total[0] += charge.montant;
   }
 
   /**
@@ -48,8 +52,10 @@ export class BudgetService {
    * @param index L'index du revenu a supprimé
    */
   supRevenu(index:number){
-    this.reste -= this.revenus[index].montant;
+    this.total[2] -= this.revenus[index].montant;
+    this.total[1] -= this.revenus[index].montant;
     this.revenus.splice(index,1);
+    
   }
 
   /**
@@ -57,7 +63,8 @@ export class BudgetService {
    * @param index L'index de la charge a supprimé
    */
   supCharge(index:number){
-    this.reste += this.charges[index].montant;
+    this.total[2] += this.charges[index].montant;    
+    this.total[0] -= this.charges[index].montant;
     this.charges.splice(index,1);
   }
 }

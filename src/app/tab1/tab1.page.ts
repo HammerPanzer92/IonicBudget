@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Subscription, observable, interval } from 'rxjs';
 import { BudgetService } from '../budget.service';
+import Chart from 'chart.js/auto'
 
 @Component({
   selector: 'app-tab1',
@@ -9,25 +10,63 @@ import { BudgetService } from '../budget.service';
 })
 
 export class Tab1Page {
+  //Ces variables servent a pouvoir créé le graphique
+  @ViewChild("chart") chartHTML;
+  chart: any;
+
   charges: any[];
   revenus: any[];
-  reste: number = 0;
+  total: number[];
   sub: Subscription = new Subscription;
 
-  constructor(private budget: BudgetService) {}
+  totalCharges: number = 0;
+  totalRevenus: number = 0;
 
-  ngOnInit(){
+  constructor(private budget: BudgetService) { }
+
+  ngOnInit() {
     this.charges = this.budget.charges;
     this.revenus = this.budget.revenus;
     this.budget.calculReste();
-    this.reste = this.budget.reste;
+    this.total = this.budget.total;
 
-    //Récup du reste via interval (probablement pas opti)
-    const test= interval(1000);
-    this.sub=test.subscribe(
-      (osef) => {this.reste = this.budget.reste;},
-      (error) => {console.warn(error)},
-      ()=>{console.log("A plus");}
-    );
+    for(let charge of this.charges){
+      this.totalCharges += charge.montant;
+    }
+
+    for(let revenu of this.revenus){
+      this.totalRevenus += revenu.montant;
+    }
   }
+
+  ionViewDidEnter() {
+    this.createChart();
+    console.log("coucou")
+  }
+
+  createChart(){
+    this.chart = new Chart(this.chartHTML.nativeElement, {
+      type: 'pie',
+      data: {
+        labels: ['Charges', 'Revenus', "Reste"],
+        datasets: [{
+          label: '# of Votes',
+          data: [this.total[0], this.total[1], this.total[2]],
+          backgroundColor: [
+            'rgba(255, 159, 64, 0.2)',
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)'
+          ],
+          hoverBackgroundColor: [
+            '#FFCE56',
+            '#FF6384',
+            '#36A2EB'
+          ]
+        }]
+      }, options:{
+        responsive: true
+      }
+    });
+    }
+  
 }
