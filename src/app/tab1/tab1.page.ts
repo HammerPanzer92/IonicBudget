@@ -39,9 +39,16 @@ export class Tab1Page {
     }
   }
 
+  //Quand la vue est affiché (cf https://ionicframework.com/docs/angular/lifecycle )
   ionViewDidEnter() {
+    //On créé le graphique
     this.createChart();
-    console.log("coucou")
+  }
+
+  //Pareil quand elle s'efface
+  ionViewDidLeave(){
+    //On détruis le graphique pour le redessiné après
+    this.chart.destroy();
   }
 
   createChart(){
