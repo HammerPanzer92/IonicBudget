@@ -21,6 +21,8 @@ export class Tab1Page {
     this.revenus = this.budget.revenus;
     this.budget.calculReste();
     this.reste = this.budget.reste;
+
+    //Récup du reste via interval (probablement pas opti)
     const test= interval(1000);
     this.sub=test.subscribe(
       (osef) => {this.reste = this.budget.reste;},

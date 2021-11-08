@@ -8,6 +8,7 @@ import { BudgetService } from '../budget.service';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
+  //Permet de gérer quelle partie de la page on montre
   addRev: boolean = false;
 
   revenus: any[];
@@ -19,10 +20,17 @@ export class Tab2Page {
     this.revenus = this.budget.revenus;
   }
 
+  /**
+   * Mets addRev sur true
+   */
   modifAddRev(){
     this.addRev = true;
   }
 
+  /**
+   * Ajoute un nouveau revenu dans le tableau
+   * @param f Le ngForm
+   */
   ajoutRevenu(f: NgForm){
     let newRevenu = {nom: f.value.intitule,montant: f.value.montant};
     this.budget.addRevenu(newRevenu);
@@ -30,6 +38,10 @@ export class Tab2Page {
     this.addRev = false;
   }
 
+  /**
+   * Supprime un revenu du tableau
+   * @param index index du revenu a supprimer
+   */
   supRevenu(index:number){
     this.budget.supRevenu(index);
   }

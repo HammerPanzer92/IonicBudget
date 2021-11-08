@@ -7,6 +7,7 @@ import { BudgetService } from '../budget.service';
   templateUrl: 'tab3.page.html',
   styleUrls: ['tab3.page.scss']
 })
+//Cette classe fait la même chose que Tab2, mais avec les charges
 export class Tab3Page {
   addCharge: boolean = false;
 
