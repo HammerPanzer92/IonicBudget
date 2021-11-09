@@ -16,9 +16,16 @@
     <ion-card-header>Les revenus</ion-card-header>
     <ion-card-content>
       <ion-list>
-        <ion-item *ngFor="let revenu of revenus;let indexRev=index">
-          {{revenu.nom}} : {{revenu.montant}} <ion-button (click)="supRevenu(indexRev)" color="danger"><ion-icon name="trash-outline"></ion-icon></ion-button>
-        </ion-item>
+        <ion-item-sliding *ngFor="let revenu of revenus;let indexRev=index">
+          <ion-item>
+            {{revenu.nom}} : {{revenu.montant}}
+          </ion-item>
+          <ion-item-options side="end">
+            <ion-item-option (click)="supRevenu(indexRev)" color="danger">
+              <ion-icon slot="icon-only" name="trash"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
         <ion-button (click)="modifAddRev()">Ajout revenu</ion-button>
       </ion-list>
     </ion-card-content>
