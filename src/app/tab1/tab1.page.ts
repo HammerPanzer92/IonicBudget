@@ -49,13 +49,21 @@ export class Tab1Page {
     this.chart.destroy();
   }
 
+  /**
+   * Créé la charte graphique
+   */
   createChart(){
+    //On passe d'abord l'élément HTML
     this.chart = new Chart(this.chartHTML.nativeElement, {
+      //Puis on précise le type (cf https://www.chartjs.org/docs/latest )
       type: 'pie',
       data: {
+        //On précise ensuite les noms des champs
         labels: ['Charges', 'Revenus', "Reste"],
         datasets: [{
+          //Les valeurs
           data: [this.total[0], this.total[1], this.total[2]],
+          //Leurs couleurs de fond
           backgroundColor: [
             'rgba(255, 159, 64, 0.2)',
             'rgba(255, 99, 132, 0.2)',
@@ -68,9 +76,9 @@ export class Tab1Page {
           ]
         }]
       }, options:{
-        responsive: true
+        responsive: true,
+        maintainAspectRatio: true
       }
     });
-    }
-  
+    }  
 }
