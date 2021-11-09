@@ -25,26 +25,44 @@
   <ion-card>
     <ion-card-header>Détails</ion-card-header>
     <ion-card-content>
-      <ion-list>
-        <ion-list-header color="primary">
-          Dépense
-        </ion-list-header>
-        <ion-item *ngFor="let charge of charges">
-          {{charge.nom}} : {{charge.montant}}
-        </ion-item>
-        <ion-list-header color="primary">
-          Revenus
-        </ion-list-header>
-        <ion-item *ngFor="let revenu of revenus">
-          {{revenu.nom}} : {{revenu.montant}}
-        </ion-item>
-        <ion-list-header color="primary">
-          Reste
-        </ion-list-header>
-        <ion-item>
-          {{total[2]}}
-        </ion-item>
-      </ion-list>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-12 class="titreCol">
+            Dépense
+          </ion-col>
+        </ion-row>
+        <ion-row *ngFor="let charge of charges">
+          <ion-col>
+            {{charge.nom}} :
+          </ion-col>
+          <ion-col>
+            {{charge.montant}}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-12 class="titreCol">
+            Revenus
+          </ion-col>
+        </ion-row>
+        <ion-row *ngFor="let revenu of revenus">
+          <ion-col>
+            {{revenu.nom}} :
+          </ion-col>
+          <ion-col>
+            {{revenu.montant}}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-12 class="titreCol">
+            Reste
+          </ion-col>          
+        </ion-row>
+        <ion-row>
+          <ion-col col-12>
+            {{total[2]}}
+          </ion-col>          
+        </ion-row>
+        </ion-grid>
     </ion-card-content>
   </ion-card>
 </ion-content>
